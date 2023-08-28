@@ -16,13 +16,13 @@ import me.tatarka.inject.annotations.Component
 
 @Component
 abstract class MainActivityComponent(@Component val parent: ApplicationComponent) {
-  abstract val greeter: CommonGreeter
+  abstract val greeter: (String) -> CommonGreeter
 }
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val greeter = MainActivityComponent::class.create(applicationComponent).greeter
+    val greeter = MainActivityComponent::class.create(applicationComponent).greeter("Hello")
     setContent {
       Box(
         modifier = Modifier
